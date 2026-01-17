@@ -2,16 +2,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
-using FluentValidation;
 using MongoDB.Bson.Serialization.Conventions;
 using UserManagement.Core.Interfaces;
+using UserManagement.Core.Entities;
 using UserManagement.Infrastructure.Persistence;
 using UserManagement.Infrastructure.Security;
 using UserManagement.Infrastructure.Services;
 using UserManagement.Application.Interfaces;
 using UserManagement.Application.Services;
-using UserManagement.Application.Validators;
-using UserManagement.Application.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,9 +30,6 @@ builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IRiskService, RiskService>();
 builder.Services.AddScoped<IUserService, UserService>();
-
-// FluentValidation
-builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
